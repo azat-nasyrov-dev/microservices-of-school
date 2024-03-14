@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { RegisterDto } from './auth.controller';
 import { UserRepository } from '../user/repositories/user.repository';
 import { UserEntity } from '../user/entities/user.entity';
 import { UserRole } from '@microservices-of-school/interfaces';
 import { JwtService } from '@nestjs/jwt';
+import { AccountRegister } from '@microservices-of-school/contracts';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async signup({ displayName, email, password }: RegisterDto) {
+  public async signup({ displayName, email, password }: AccountRegister.Request) {
     const oldUser = await this.userRepository.findUserByEmail(email);
 
     if (oldUser) {
