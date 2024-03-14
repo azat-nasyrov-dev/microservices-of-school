@@ -13,8 +13,10 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
+      "@microservices-of-school/contracts": ["libs/contracts/src/index.ts"],
       "@microservices-of-school/interfaces": ["libs/interfaces/src/index.ts"]
     }
   },
