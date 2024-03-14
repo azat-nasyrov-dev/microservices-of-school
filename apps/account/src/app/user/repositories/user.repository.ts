@@ -24,6 +24,10 @@ export class UserRepository {
     return await this.userModel.findById(id).exec();
   }
 
+  public async updateUser({ _id, ...rest }: UserEntity) {
+    return await this.userModel.updateOne({ _id }, { ...rest }).exec();
+  }
+
   public async deleteUserByEmail(email: string) {
     return await this.userModel.deleteOne({ email }).exec();
   }
