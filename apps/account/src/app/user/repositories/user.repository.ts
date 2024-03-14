@@ -20,6 +20,10 @@ export class UserRepository {
     return await this.userModel.findOne({ email }).exec();
   }
 
+  public async findUserById(id: string) {
+    return await this.userModel.findById(id).exec();
+  }
+
   public async deleteUserByEmail(email: string) {
     return await this.userModel.deleteOne({ email }).exec();
   }
