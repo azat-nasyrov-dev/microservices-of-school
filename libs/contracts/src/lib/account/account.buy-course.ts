@@ -12,6 +12,6 @@ export namespace AccountBuyCourse {
   }
 
   export class Response {
-    paymentUrl: string;
+    paymentLink: string;
   }
 }
