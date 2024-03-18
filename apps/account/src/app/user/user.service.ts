@@ -5,7 +5,6 @@ import { IUser } from '@microservices-of-school/interfaces';
 import { UserEntity } from './entities/user.entity';
 import { BuyCourseSaga } from './sagas/buy-course.saga';
 import { UserEventEmitter } from './user.event-emitter';
-import { Promise } from 'mongoose';
 
 @Injectable()
 export class UserService {
