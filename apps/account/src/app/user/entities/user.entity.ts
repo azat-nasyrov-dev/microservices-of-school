@@ -1,10 +1,4 @@
-import {
-  IDomainEvent,
-  IUser,
-  IUserCourses,
-  PurchaseState,
-  UserRole
-} from '@microservices-of-school/interfaces';
+import { IDomainEvent, IUser, IUserCourses, PurchaseState, UserRole } from '@microservices-of-school/interfaces';
 import { compare, genSalt, hash } from 'bcryptjs';
 import { AccountChangedCourse } from '@microservices-of-school/contracts';
 
@@ -57,6 +51,10 @@ export class UserEntity implements IUser {
       data: { courseId, userId: this._id, state }
     });
     return this;
+  }
+
+  public getCourseState(courseId: string): PurchaseState {
+    return this.courses.find(c => c.courseId === courseId)?.purchaseState ?? PurchaseState.Started;
   }
 
   public getPublicProfile() {
