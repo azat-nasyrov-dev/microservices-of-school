@@ -12,7 +12,9 @@ export class AuthController {
   public async register(@Body() dto: RegisterDto) {
     try {
       return await this.rmqService
-        .send<AccountRegister.Request, AccountRegister.Response>(AccountRegister.topic, dto);
+        .send<AccountRegister.Request, AccountRegister.Response>(AccountRegister.topic, dto, {
+          headers: { requestId: 'abc' },
+        });
     } catch (err) {
       if (err instanceof Error) {
         throw new UnauthorizedException(err.message);

@@ -1,7 +1,7 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body, Controller, Logger } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AccountLogin, AccountRegister } from '@microservices-of-school/contracts';
-import { RMQRoute, RMQValidate } from 'nestjs-rmq';
+import { Message, RMQMessage, RMQRoute, RMQValidate } from 'nestjs-rmq';
 
 @Controller()
 export class AuthController {
@@ -9,7 +9,11 @@ export class AuthController {
 
   @RMQValidate()
   @RMQRoute(AccountRegister.topic)
-  public async register(@Body() dto: AccountRegister.Request): Promise<AccountRegister.Response> {
+  public async register(dto: AccountRegister.Request, @RMQMessage msg: Message): Promise<AccountRegister.Response> {
+    const rid = msg.properties.headers['requestId'];
+    const logger = new Logger(rid);
+    logger.error('something went wrong');
+
     return await this.authService.signup(dto);
   }
 
